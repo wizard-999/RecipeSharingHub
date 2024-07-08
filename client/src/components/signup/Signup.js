@@ -32,11 +32,11 @@ function Signup() {
     try {
       let res;
       if (userObj.userType === 'user') {
-        res = await axios.post("https://recipe-sharing-hub.vercel.app/user-api/user", userObj);
+        res = await axios.post("http://localhost:4000/user-api/user", userObj);
       } else if (userObj.userType === 'author') {
-        res = await axios.post("https://recipe-sharing-hub.vercel.app/author-api/author", userObj);
+        res = await axios.post("http://localhost:4000/author-api/author", userObj);
       } else {
-        res = await axios.post("https://recipe-sharing-hub.vercel.app/admin-api/admin", userObj);
+        res = await axios.post("http://localhost:4000/admin-api/admin", userObj);
       }
       if (res.status === 201 || res.data.message.includes('created')) {
         setState(true);
