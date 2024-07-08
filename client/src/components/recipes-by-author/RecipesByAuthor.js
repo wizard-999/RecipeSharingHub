@@ -16,7 +16,7 @@ function RecipesByAuthor() {
 
   const getRecipesOfCurrentAuthor = useCallback(async () => {
     try {
-      const res = await axiosWithToken.get(`http://localhost:4000/author-api/recipes/${currentUser.username}`);
+      const res = await axiosWithToken.get(`https://recipe-sharing-hub.vercel.app/author-api/recipes/${currentUser.username}`);
       if (Array.isArray(res.data.payload)) {
         setRecipesList(res.data.payload);
       } else {
@@ -41,7 +41,7 @@ function RecipesByAuthor() {
 
   const deleteRecipe = async (recipeId) => {
     try {
-      const res = await axiosWithToken.delete(`http://localhost:4000/author-api/recipe/${recipeId}`);
+      const res = await axiosWithToken.delete(`https://recipe-sharing-hub.vercel.app/author-api/recipe/${recipeId}`);
       if (res.data.message === 'Recipe deleted') {
         setRecipesList(prevState => prevState.map(recipe =>
           recipe.recipeId === recipeId ? { ...recipe, status: 'deleted' } : recipe
@@ -54,7 +54,7 @@ function RecipesByAuthor() {
 
   const restoreRecipe = async (recipeId) => {
     try {
-      const res = await axiosWithToken.put(`http://localhost:4000/author-api/recipe/${recipeId}/restore`);
+      const res = await axiosWithToken.put(`https://recipe-sharing-hub.vercel.app/author-api/recipe/${recipeId}/restore`);
       if (res.data.message === 'Recipe restored') {
         setRecipesList(prevState => prevState.map(recipe =>
           recipe.recipeId === recipeId ? { ...recipe, status: 'active' } : recipe
