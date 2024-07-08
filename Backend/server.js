@@ -6,6 +6,7 @@ const mongoClient = require('mongodb').MongoClient;
 const path = require('path');
 const cors = require('cors');
 
+// Use CORS middleware to allow requests from the frontend
 app.use(cors({
     origin: 'https://recipe-sharing-hub-frontend.vercel.app', // Update with your frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -13,7 +14,7 @@ app.use(cors({
 }));
 
 // Deploy react build in this server
-app.use(exp.static(path.join(__dirname, '../client/public')));
+app.use(exp.static(path.join(__dirname, '../client/build')));
 // To parse the body of requests
 app.use(exp.json());
 
@@ -53,17 +54,17 @@ const adminApp = require('./APIs/admin-api');
 app.use('/user-api', userApp);
 // If path starts with author-api, send req to authorApp
 app.use('/author-api', authorApp);
-// If path starts with admin-api, send req adminApp
+// If path starts with admin-api, send req to adminApp
 app.use('/admin-api', adminApp);
 
 // Deals with page refresh
 app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 // Express error handler
 app.use((err, req, res, next) => {
-    res.send({ message: "error", payload: err.message });
+    res.status(500).send({ message: "error", payload: err.message });
 });
 
 // Assign port number
