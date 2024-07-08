@@ -14,7 +14,10 @@ app.use(cors({
 }));
 
 // Deploy react build in this server
-app.use(exp.static(path.join(__dirname, '../client/build')));
+const staticPath = path.join(__dirname, '../client/build');
+console.log(`Serving static files from ${staticPath}`);
+app.use(exp.static(staticPath));
+
 // To parse the body of requests
 app.use(exp.json());
 
@@ -59,14 +62,16 @@ app.use('/admin-api', adminApp);
 
 // Deals with page refresh
 app.use((req, res, next) => {
+    console.log(`Handling request to ${req.url}`);
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 // Express error handler
 app.use((err, req, res, next) => {
+    console.error(err);
     res.status(500).send({ message: "error", payload: err.message });
 });
 
 // Assign port number
 const port = process.env.PORT || 4000;
-app.listen(port, () => console.log(`Web server on port ${port}`));
+app.listen(port, () => console.log(`Web server running on port ${port}`));
