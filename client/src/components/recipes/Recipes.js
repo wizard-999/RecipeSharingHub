@@ -15,7 +15,7 @@ function Recipes() {
 
   const getRecipes = async (author = '', recipeType = '') => {
     try {
-      const res = await axiosWithToken.get('https://recipe-sharing-hub.vercel.app/user-api/recipes', {
+      const res = await axiosWithToken.get('http://localhost:4000/user-api/recipes', {
         params: { author, recipeType },
       });
       console.log('Server response:', res.data); // Log the server response
