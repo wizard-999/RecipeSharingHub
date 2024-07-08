@@ -30,7 +30,7 @@ function Recipe() {
 
   const deleteRecipe = async () => {
     try {
-      const res = await axiosWithToken.delete(`http://localhost:4000/author-api/recipe/${currentRecipe.recipeId}`);
+      const res = await axiosWithToken.delete(`https://recipe-sharing-hub.vercel.app/author-api/recipe/${currentRecipe.recipeId}`);
       if (res.data.message === 'Recipe deleted') {
         setCurrentRecipe({ ...currentRecipe, status: 'deleted' });
       }
@@ -41,7 +41,7 @@ function Recipe() {
 
   const restoreRecipe = async () => {
     try {
-      const res = await axiosWithToken.put(`http://localhost:4000/author-api/recipe/${currentRecipe.recipeId}/restore`);
+      const res = await axiosWithToken.put(`https://recipe-sharing-hub.vercel.app/author-api/recipe/${currentRecipe.recipeId}/restore`);
       if (res.data.message === 'Recipe restored') {
         setCurrentRecipe({ ...currentRecipe, status: 'active' });
       }
@@ -53,7 +53,7 @@ function Recipe() {
   const writeComment = async (commentObj) => {
     try {
       commentObj.username = currentUser.username;
-      const res = await axiosWithToken.post(`http://localhost:4000/user-api/comment/${currentRecipe.recipeId}`, commentObj);
+      const res = await axiosWithToken.post(`https://recipe-sharing-hub.vercel.app/user-api/comment/${currentRecipe.recipeId}`, commentObj);
       if (res.data.message === "Comment posted") {
         setComment("Comment posted successfully!");
         setCurrentRecipe({ ...currentRecipe, comments: [...currentRecipe.comments, commentObj] });
@@ -101,7 +101,7 @@ function Recipe() {
     updatedRecipe.dateOfModification = new Date().toISOString();
     updatedRecipe.ingredients = ingredients;
     try {
-      const res = await axiosWithToken.put(`http://localhost:4000/author-api/recipe/${currentRecipe.recipeId}`, updatedRecipe);
+      const res = await axiosWithToken.put(`https://recipe-sharing-hub.vercel.app/author-api/recipe/${currentRecipe.recipeId}`, updatedRecipe);
       if (res.data.message === 'Recipe updated') {
         setRecipeEditStatus(false);
         setCurrentRecipe(res.data.recipe);
