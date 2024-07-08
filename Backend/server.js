@@ -13,7 +13,7 @@ app.use(cors({
 }));
 
 // Deploy react build in this server
-app.use(exp.static(path.join(__dirname, '../client/build')));
+app.use(exp.static(path.join(__dirname, '../client/public')));
 // To parse the body of requests
 app.use(exp.json());
 
@@ -58,7 +58,7 @@ app.use('/admin-api', adminApp);
 
 // Deals with page refresh
 app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 // Express error handler
