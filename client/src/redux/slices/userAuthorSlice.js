@@ -8,11 +8,11 @@ export const userAuthorLoginThunk = createAsyncThunk(
     try {
       let url;
       if (userCredObj.userType === "user") {
-        url = "http://localhost:4000/user-api/login";
+        url = "https://recipe-sharing-hub.vercel.app/user-api/login";
       } else if (userCredObj.userType === "author") {
-        url = "http://localhost:4000/author-api/login";
+        url = "https://recipe-sharing-hub.vercel.app/author-api/login";
       } else if (userCredObj.userType === "admin") {
-        url = "http://localhost:4000/admin-api/login";
+        url = "https://recipe-sharing-hub.vercel.app/admin-api/login";
       } else {
         return thunkApi.rejectWithValue("Invalid user type");
       }
