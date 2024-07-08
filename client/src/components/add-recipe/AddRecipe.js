@@ -36,7 +36,7 @@ function AddRecipe() {
 
     // Make HTTP post request
     try {
-      const res = await axiosWithToken.post('https://recipe-sharing-hub.vercel.app/author-api/recipe', recipe);
+      const res = await axiosWithToken.post('http://localhost:4000/author-api/recipe', recipe);
       console.log('Response:', res);
       if (res.data.message === 'New recipe created') {
         reset(); // Reset form after successful submission
