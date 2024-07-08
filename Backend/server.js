@@ -7,7 +7,7 @@ const path = require('path');
 const cors = require('cors');
 
 app.use(cors({
-    origin: 'https://recipe-sharing-hub.vercel.app', // Update with your frontend URL
+    origin: 'https://recipe-sharing-hub-frontend.vercel.app/', // Update with your frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
